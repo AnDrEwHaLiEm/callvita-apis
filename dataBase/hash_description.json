@@ -1,1 +1,13 @@
-{"Learn how to use react in building web app":[0],"Learn how to use node in building server":[1],"Andrew will be haired":[3,4,2]}
+{
+    "Learn how to use react in building web app": [
+        0
+    ],
+    "Learn how to use node in building server": [
+        1
+    ],
+    "Andrew will be hired": [
+        3,
+        4,
+        2
+    ]
+}
