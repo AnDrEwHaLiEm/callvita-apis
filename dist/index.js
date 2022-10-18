@@ -12,6 +12,6 @@ var port = process.env.PORT;
 app.use(express_1.default.json());
 app.use('/task', taskRouter_1.default);
 app.listen(port, function () {
-    console.log("\u26A1\uFE0F[server]: Server is running at https://localhost:".concat(port));
+    console.log("Server is running at https://localhost:".concat(port));
 });
 exports.default = app;

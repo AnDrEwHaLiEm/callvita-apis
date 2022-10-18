@@ -175,11 +175,10 @@ export default class Task {
       const index = this.titleHash[title];
 
       const ALlTask = index.map((element: number) => {
-        if (element < this.tasks.length)
-          return this.tasks[element];
-        return { id: "null", description: "null", title: "null" };
+        if (element < this.tasks.length) return this.tasks[element];
+        return { id: 'null', description: 'null', title: 'null' };
       });
-      
+
       return ALlTask;
     } else throw 'Not Found';
   }
@@ -189,9 +188,8 @@ export default class Task {
       const index = this.descriptionHash[description];
 
       const ALlTask = index.map((element: number) => {
-        if (element < this.tasks.length)
-          return this.tasks[element];
-        return { id: "null", description: "null", title: "null" };
+        if (element < this.tasks.length) return this.tasks[element];
+        return { id: 'null', description: 'null', title: 'null' };
       });
 
       return ALlTask;

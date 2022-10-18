@@ -168,8 +168,9 @@ var Task = /** @class */ (function () {
         if (title in this.titleHash) {
             var index = this.titleHash[title];
             var ALlTask = index.map(function (element) {
-                var task = _this.tasks[element];
-                return task;
+                if (element < _this.tasks.length)
+                    return _this.tasks[element];
+                return { id: 'null', description: 'null', title: 'null' };
             });
             return ALlTask;
         }
@@ -181,8 +182,9 @@ var Task = /** @class */ (function () {
         if (description in this.descriptionHash) {
             var index = this.descriptionHash[description];
             var ALlTask = index.map(function (element) {
-                var task = _this.tasks[element];
-                return task;
+                if (element < _this.tasks.length)
+                    return _this.tasks[element];
+                return { id: 'null', description: 'null', title: 'null' };
             });
             return ALlTask;
         }
