@@ -2,16 +2,19 @@
 
 
 
-    There is Two DataBase one for test and other is for app
-    To use Test dataBase make ENV in .env test 
+    There is Two DataBase one for testing and other for app
+    To use Test dataBase make  in .env ENV=dataBaseTest 
     To run ts file use npm run dev
     To run app after building use npm run start
     To run test *dataBase will use test database auto* npm run test
 
     *there is two library i used to use them in my project ESlint and prettier*
 
+
     To run ESlint use npm run lint
     To run prettier use npm run prettier 
+
+    *removeHashingFile I used binary search twice although I got the same result I made that because maybe anyone adds anything wrong to the file manually and this will make result different but if I can be sure the database is correct data i will not use it twice*
 
     EndPoint APIS =>{
         create Task =>{

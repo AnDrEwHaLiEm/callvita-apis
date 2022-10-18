@@ -173,10 +173,13 @@ export default class Task {
   getByTitle(title: string): taskModel[] {
     if (title in this.titleHash) {
       const index = this.titleHash[title];
+
       const ALlTask = index.map((element: number) => {
-        const task = this.tasks[element];
-        return task;
+        if (element < this.tasks.length)
+          return this.tasks[element];
+        return { id: "null", description: "null", title: "null" };
       });
+      
       return ALlTask;
     } else throw 'Not Found';
   }
@@ -184,10 +187,13 @@ export default class Task {
   getByDescription(description: string): taskModel[] {
     if (description in this.descriptionHash) {
       const index = this.descriptionHash[description];
+
       const ALlTask = index.map((element: number) => {
-        const task = this.tasks[element];
-        return task;
+        if (element < this.tasks.length)
+          return this.tasks[element];
+        return { id: "null", description: "null", title: "null" };
       });
+
       return ALlTask;
     } else throw 'Not Found';
   }
