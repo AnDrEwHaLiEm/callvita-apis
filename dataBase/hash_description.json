@@ -5,9 +5,11 @@
     "Learn how to use node in building server": [
         1
     ],
-    "Andrew will be hired": [
-        3,
-        4,
+    "Learn how to manipulate arrays in javascript": [
         2
+    ],
+    "Learn how to use Test with Jasmine": [
+        3,
+        4
     ]
 }

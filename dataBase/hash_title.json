@@ -1,1 +1,15 @@
-{"Learn React":[0],"Learn Node":[1],"Andrew":[3,4,2]}
+{
+    "Learn React": [
+        0
+    ],
+    "Learn Node": [
+        1
+    ],
+    "Learn Array Manipulation": [
+        2
+    ],
+    "Learn Jasmine Test": [
+        3,
+        4
+    ]
+}

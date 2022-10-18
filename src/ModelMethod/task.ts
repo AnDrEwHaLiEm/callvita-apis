@@ -1,9 +1,10 @@
 import { taskModel } from '../Model/taskModel';
 import * as fs from 'fs';
+import dotenv from 'dotenv';
 
-const compare = (a: number, b: number): number => {
-  return a - b;
-};
+dotenv.config();
+
+const databasePath = process.env.ENV;
 
 export default class Task {
   tasks: Array<taskModel>;
@@ -13,16 +14,16 @@ export default class Task {
 
   constructor() {
     const tasksBuffer_string = fs
-      .readFileSync(`${__dirname}/../../dataBase/Tasks.json`)
+      .readFileSync(`${__dirname}/../../${databasePath}/Tasks.json`)
       .toString();
     const HashTitleBuffer_string = fs
-      .readFileSync(`${__dirname}/../../dataBase/hash_title.json`)
+      .readFileSync(`${__dirname}/../../${databasePath}/hash_title.json`)
       .toString();
     const HashDescriptionBuffer_string = fs
-      .readFileSync(`${__dirname}/../../dataBase/hash_description.json`)
+      .readFileSync(`${__dirname}/../../${databasePath}/hash_description.json`)
       .toString();
     const HashIdsBuffer_string = fs
-      .readFileSync(`${__dirname}/../../dataBase/ids_index.json`)
+      .readFileSync(`${__dirname}/../../${databasePath}/ids_index.json`)
       .toString();
 
     this.tasks = JSON.parse(tasksBuffer_string);
@@ -33,19 +34,19 @@ export default class Task {
   writeData(): boolean {
     try {
       fs.writeFileSync(
-        `${__dirname}/../../dataBase/Tasks.json`,
+        `${__dirname}/../../${databasePath}/Tasks.json`,
         JSON.stringify(this.tasks)
       );
       fs.writeFileSync(
-        `${__dirname}/../../dataBase/hash_title.json`,
+        `${__dirname}/../../${databasePath}/hash_title.json`,
         JSON.stringify(this.titleHash)
       );
       fs.writeFileSync(
-        `${__dirname}/../../dataBase/hash_description.json`,
+        `${__dirname}/../../${databasePath}/hash_description.json`,
         JSON.stringify(this.descriptionHash)
       );
       fs.writeFileSync(
-        `${__dirname}/../../dataBase/ids_index.json`,
+        `${__dirname}/../../${databasePath}/ids_index.json`,
         JSON.stringify(this._ids)
       );
       return true;
@@ -60,7 +61,7 @@ export default class Task {
     high: number,
     key: number
   ): number => {
-    if (high <= low) return -1;
+    if (high < low) return -1;
 
     const mid = Math.trunc((low + high) / 2);
     if (key == arr[mid]) return mid;
@@ -70,44 +71,42 @@ export default class Task {
 
   addHashingFile(taskData: taskModel): void {
     const { id, title, description } = taskData;
-    if (title in this.titleHash) {
-      this.titleHash[title].push(this._ids[id]);
-    } else {
-      this.titleHash[title] = [this._ids[id]];
-    }
-    if (description in this.descriptionHash) {
-      this.descriptionHash[description].push(this._ids[id]);
-    } else {
-      this.descriptionHash[description] = [this._ids[id]];
-    }
+
+    const index = this._ids[id];
+    if (title in this.titleHash) this.titleHash[title].push(index);
+    else this.titleHash[title] = [index];
+
+    if (description in this.descriptionHash)
+      this.descriptionHash[description].push(index);
+    else this.descriptionHash[description] = [index];
   }
 
   removeHashingFile(index: number): void {
     const lastTitle = this.tasks[index].title;
     const lastDescription = this.tasks[index].description;
 
-    this.titleHash[lastTitle].sort(compare);
-    const findIndexFromTitleHash = this.binarySearch(
+    this.titleHash[lastTitle].sort((a: number, b: number) => {
+      return a - b;
+    });
+    const findTitleIndex = this.binarySearch(
       this.titleHash[lastTitle],
       0,
       this.titleHash[lastTitle].length,
       index
     );
-    this.titleHash[lastTitle].splice(findIndexFromTitleHash, 1);
-
+    this.titleHash[lastTitle].splice(findTitleIndex, 1);
     if (this.titleHash[lastTitle].length == 0) delete this.titleHash[lastTitle];
 
-    this.descriptionHash[lastDescription].sort();
-    const findIndexFromDescriptionHash = this.binarySearch(
+    this.descriptionHash[lastDescription].sort((a: number, b: number) => {
+      return a - b;
+    });
+    const findDescriptionIndex = this.binarySearch(
       this.descriptionHash[lastDescription],
       0,
       this.descriptionHash[lastDescription].length,
       index
     );
-    this.descriptionHash[lastDescription].splice(
-      findIndexFromDescriptionHash,
-      1
-    );
+    this.descriptionHash[lastDescription].splice(findDescriptionIndex, 1);
 
     if (this.descriptionHash[lastDescription].length == 0)
       delete this.descriptionHash[lastDescription];
@@ -149,7 +148,6 @@ export default class Task {
     if (!(_id in this._ids)) throw 'Not Found';
     const index = this._ids[_id];
     const lastIndex = this.tasks.length - 1;
-    console.log(index, lastIndex);
     if (index === lastIndex) {
       this.removeHashingFile(index);
     } else {

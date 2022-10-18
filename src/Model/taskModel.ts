@@ -1,5 +1,5 @@
 export type taskModel = {
-  id: string;
+  id: number | string;
   title: string;
   description: string;
 };

@@ -59,7 +59,7 @@ taskRouter.get('/getMany', async (req: Request, res: Response) => {
   }
 });
 
-taskRouter.get('/getOne/title/:title', async (req: Request, res: Response) => {
+taskRouter.get('/get/title/:title', async (req: Request, res: Response) => {
   try {
     const { title } = req.params;
     const task = new Task();
@@ -72,7 +72,7 @@ taskRouter.get('/getOne/title/:title', async (req: Request, res: Response) => {
 });
 
 taskRouter.get(
-  '/getOne/description/:description',
+  '/get/description/:description',
   async (req: Request, res: Response) => {
     try {
       const { description } = req.params;
@@ -86,7 +86,7 @@ taskRouter.get(
   }
 );
 
-taskRouter.get('/getOne/id/:id', async (req: Request, res: Response) => {
+taskRouter.get('/getOne/:id', async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
     const task = new Task();
