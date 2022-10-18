@@ -31,7 +31,7 @@ export default class Task {
     this.descriptionHash = JSON.parse(HashDescriptionBuffer_string);
     this._ids = JSON.parse(HashIdsBuffer_string);
   }
-  writeData(): boolean {
+  private writeData(): boolean {
     try {
       fs.writeFileSync(
         `${__dirname}/../../${databasePath}/Tasks.json`,
@@ -55,7 +55,7 @@ export default class Task {
     }
   }
 
-  binarySearch = (
+  private binarySearch = (
     arr: number[],
     low: number,
     high: number,
@@ -69,7 +69,7 @@ export default class Task {
     return this.binarySearch(arr, low, mid - 1, key);
   };
 
-  addHashingFile(taskData: taskModel): void {
+  private addHashingFile(taskData: taskModel): void {
     const { id, title, description } = taskData;
 
     const index = this._ids[id];
@@ -81,7 +81,7 @@ export default class Task {
     else this.descriptionHash[description] = [index];
   }
 
-  removeHashingFile(index: number): void {
+  private removeHashingFile(index: number): void {
     const lastTitle = this.tasks[index].title;
     const lastDescription = this.tasks[index].description;
 
