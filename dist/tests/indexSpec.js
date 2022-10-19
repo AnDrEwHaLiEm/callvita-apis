@@ -186,6 +186,20 @@ describe('task Tests EndPint', function () {
             }
         });
     }); });
+    it('delete unexist Task', function () { return __awaiter(void 0, void 0, void 0, function () {
+        var response;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, request.delete('/task/delete/454')];
+                case 1:
+                    response = _a.sent();
+                    console.log(response.body);
+                    expect(response.status).toEqual(400);
+                    expect(response.status).toEqual(400);
+                    return [2 /*return*/];
+            }
+        });
+    }); });
     it('get All Tasks', function () { return __awaiter(void 0, void 0, void 0, function () {
         var response;
         return __generator(this, function (_a) {
