@@ -82,7 +82,7 @@
                     ]
                 }
                 or
-                body=> []
+                body=> "Not Found" []
             }
         }
         get By Title =>{
@@ -99,7 +99,7 @@
                     ]
                 }
                 or
-                body=> []
+                body=> "Not Found " []
             }
 
         }
