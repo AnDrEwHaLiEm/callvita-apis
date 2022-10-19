@@ -193,9 +193,8 @@ describe('task Tests EndPint', function () {
                 case 0: return [4 /*yield*/, request.delete('/task/delete/454')];
                 case 1:
                     response = _a.sent();
-                    console.log(response.body);
                     expect(response.status).toEqual(400);
-                    expect(response.status).toEqual(400);
+                    expect(response.body).toEqual("Not Found");
                     return [2 /*return*/];
             }
         });

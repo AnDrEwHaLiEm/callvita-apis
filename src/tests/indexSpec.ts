@@ -97,7 +97,6 @@ describe('task Tests EndPint', () => {
 
   it('delete unexist Task', async () => {
     const response = await request.delete('/task/delete/454');
-    console.log(response.body);
     expect(response.status).toEqual(400);
     expect(response.body).toEqual("Not Found");
   });
